@@ -1,4 +1,9 @@
 <h1>toppage</h1>
-<%= link_to 'ログイン', '#' %>
-<%= link_to 'ユーザー登録', new_user_path %>
+<% if logged_in? %>
+  <p>ログインユーザー：<%= current_user.name %></p>
+  <%= link_to 'ログアウト', logout_path, method: :delete %>
+<% else %>
+  <%= link_to 'ログイン', login_path %>
+  <%= link_to 'ユーザー登録', new_user_path %>
+<% end %>
 <h2>グループ一覧</h2>
