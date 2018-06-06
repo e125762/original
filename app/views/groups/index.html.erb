@@ -6,6 +6,7 @@
     <p>タイトル：<%= link_to group.title, group %></p>
     <p>起票ユーザー：<%= group.user.name %></p>
     <p>説明文：<%= group.description %></p>
+    <%= render 'groups_users/join_button', group: group %>
     <p>ーーーーーーーーーーーーーーーーーーーーーーーーーーーー</p>
   <% end %>
 <% else %>

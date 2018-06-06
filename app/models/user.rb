@@ -26,6 +26,6 @@ class User < ApplicationRecord
   end
 
   def joind?(group)
-    self.groups.include?(group)
+    self.joind_groups.include?(group)
   end
 end
