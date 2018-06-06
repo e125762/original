@@ -3,7 +3,7 @@
 <h4>現在グループ数：<%= @groups.count %>グループ</h4>
 <% if @groups.present? %>
   <% @groups.each do |group| %>
-    <p>タイトル：<%= group.title %></p>
+    <p>タイトル：<%= link_to group.title, group %></p>
     <p>起票ユーザー：<%= group.user.name %></p>
     <p>説明文：<%= group.description %></p>
     <p>ーーーーーーーーーーーーーーーーーーーーーーーーーーーー</p>

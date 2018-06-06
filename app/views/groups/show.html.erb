@@ -1,0 +1,10 @@
+<h3>グループ詳細</h3>
+<% if current_user == @group.user%>
+<%= link_to '編集', edit_group_path, class: 'btn btn-xs btn-info' %>
+<%= link_to '削除', @group, method: :delete, data: { confirm: "削除しますか？"}, class: 'btn btn-danger btn-xs'%>
+<% end %>
+<div>
+<p>グループタイトル:<%= @group.title %></p>
+<p>グループメンバー</p>
+<p>説明文：<%= @group.description %></p>
+</div>
