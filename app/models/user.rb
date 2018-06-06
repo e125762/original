@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 class User < ApplicationRecord
+
+  has_many :groups
+
   has_secure_password validations: false
 
   validates :email, presence: {message: "メールアドレスを入力してください"}, length: { maximum: 255 },
