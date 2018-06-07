@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
       flash[:success] = "コメント投稿しました"
       redirect_to @group
     else
-      @comments = @group.comments..order('created_at DESC').page(params[:page]).per(5)
+      @comments = @group.comments.order('created_at DESC').page(params[:page]).per(5)
       flash.now[:danger] = "コメントの投稿に失敗しました"
       render "groups/show"
     end
