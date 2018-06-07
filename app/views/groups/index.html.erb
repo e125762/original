@@ -3,7 +3,11 @@
 <h4>現在グループ数：<%= @groups.count %>グループ</h4>
 <% if @groups.present? %>
   <% @groups.each do |group| %>
-    <p>タイトル：<%= link_to group.title, group %></p>
+    <% if current_user.joind?(group) %>
+      <p>タイトル：<%= link_to group.title, group %></p>
+    <% else %>
+      <p>タイトル：<%= group.title %></p>
+    <% end %>
     <p>起票ユーザー：<%= group.user.name %></p>
     <p>説明文：<%= group.description %></p>
     <%= render 'groups_users/join_button', group: group %>
