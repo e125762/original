@@ -1,6 +1,7 @@
 <h3>グループ詳細</h3>
+<p><%= link_to '戻る', groups_path %></p>
 <% if current_user == @group.user%>
-  <%= link_to '編集', edit_group_path, class: 'btn btn-xs btn-info' %>
+  <%= link_to '編集', edit_group_path(@group), class: 'btn btn-xs btn-info' %>
   <%= link_to '削除', @group, method: :delete, data: { confirm: "削除しますか？"}, class: 'btn btn-danger btn-xs'%>
 <% end %>
 <div>
@@ -14,4 +15,28 @@
     <p>参加者無し</p>
   <% end %>
   <p>説明文：<%= @group.description %></p>
+
+  <div class="form-group">
+    <%= form_for @comment, url: group_comments_path(@group) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
+      <%=f.label :comment, 'コメント' %>
+      <%=f.text_area :comment, class: 'form-control'%>
+      <%= f.submit '書き込む', class: 'btn btn-primary btn-block' %>
+    <% end %>
+  </div>
+</div>
+
+<div>
+  <h3>コメント一覧</h3>
+  <% if @comments.present? %>
+    <%= paginate @comments %>
+    <% @comments.each do |comment| %>
+      <p>名前：<%= comment.user.name%></p>
+      <p>投稿日時：<%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+      <p>コメント：<%= comment.comment %></p>
+      <span>ーーーーーーーーーーーーーーーーーーーーーーーーーー</span>
+    <% end %>
+  <% else %>
+    <p>コメントなし</p>
+  <% end %>
 </div>

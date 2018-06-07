@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :groups
   has_many :groups_users
   has_many :joind_groups, through: :groups_users, source: :group
+  has_many :comments
 
   has_secure_password validations: false
 

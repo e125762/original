@@ -5,7 +5,8 @@ class GroupsController < ApplicationController
   before_action :require_group_join, only: [:show]
 
   def index
-    @groups = Group.all.order('created_at DESC').page(params[:page])
+    @groups = Group.all.order('updated_at DESC').page(params[:page]).per(5)
+    @groups_count = Group.count
   end
 
   def create
@@ -26,6 +27,8 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @group_users = @group.joind_users
+    @comment = Comment.new
+    @comments = @group.comments.order('created_at DESC').page(params[:page]).per(5)
   end
 
   def edit

@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'groups_users/create'
-  get 'groups_users/destroy'
   root to: 'toppages#index'
   resources :users, only: [:new, :create] do
     member do
@@ -13,6 +11,9 @@ Rails.application.routes.draw do
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
 
-  resources :groups
+  resources :groups do
+    resource :comments, only: [:create]
+  end
+
   resources :groups_users, only: [:create, :destroy]
 end
