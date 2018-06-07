@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
   end
 
   def require_group_join
-    group = Group.find(params[:group_id])
+    group = Group.find_by(id: params[:group_id])
     unless current_user.joind?(group)
       redirect_to root_url
     end

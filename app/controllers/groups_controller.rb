@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 class GroupsController < ApplicationController
   before_action :require_user_logged_in
-  before_action :correct_user, only: [:destroy]
+  before_action :correct_user, only: [:destroy, :edit]
   before_action :require_group_join, only: [:show]
 
   def index
@@ -67,9 +67,10 @@ class GroupsController < ApplicationController
   end
 
   def require_group_join
-    group = Group.find(params[:id])
+    group = Group.find_by(id: params[:id])
     unless current_user.joind?(group)
       redirect_to root_url
     end
   end
+
 end

@@ -14,6 +14,6 @@ Rails.application.routes.draw do
   resources :groups do
     resource :comments, only: [:create]
   end
-
+  get "/groups/:group_id/comments" => redirect("/groups/%{group_id}")
   resources :groups_users, only: [:create, :destroy]
 end
