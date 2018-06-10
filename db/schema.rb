@@ -10,7 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_04_085003) do
+ActiveRecord::Schema.define(version: 2018_06_07_020733) do
+
+  create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "comment", null: false
+    t.bigint "user_id"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_comments_on_group_id"
+    t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_groups_on_user_id"
+  end
+
+  create_table "groups_users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_groups_users_on_group_id"
+    t.index ["user_id", "group_id"], name: "index_groups_users_on_user_id_and_group_id", unique: true
+    t.index ["user_id"], name: "index_groups_users_on_user_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -20,4 +49,9 @@ ActiveRecord::Schema.define(version: 2018_06_04_085003) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comments", "groups"
+  add_foreign_key "comments", "users"
+  add_foreign_key "groups", "users"
+  add_foreign_key "groups_users", "groups"
+  add_foreign_key "groups_users", "users"
 end
