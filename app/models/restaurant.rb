@@ -3,7 +3,7 @@ class Restaurant < ApplicationRecord
 
   def self.search(search)
     if search
-      Restaurant.where(['name LIKE ?', "%#{search}%"])
+      Restaurant.where(['name LIKE ?', "%#{sanitize_sql_like(search)}%"])
     else
       Restaurant.all
     end
