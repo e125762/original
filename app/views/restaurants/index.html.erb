@@ -1,7 +1,7 @@
 <h1>店舗検索</h1>
-
+<%= link_to '戻る', group_path(params[:group_id]) %>
 <p>検索条件入力</p>
-<%= form_tag(group_restaurants_path(params[:group_id]), method: 'get') do %>
+<%= form_tag(group_restaurants_path(params[:group_id]), method: 'get',enforce_utf8: false) do %>
   <p>
     <%= collection_select(:q, :area, @areas, :id, :name, :prompt => "エリア", :selected => (params[:q][:area] if params[:q])) %>
     <%= text_field_tag :search, params[:search] %>
@@ -14,4 +14,6 @@
   <% @restaurants.each do |restaurant| %>
     <p><%= restaurant.name %></p>
   <% end %>
+<% else%>
+　　<p>検索結果がありません</p>
 <% end %>
