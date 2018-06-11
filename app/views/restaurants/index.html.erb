@@ -11,9 +11,11 @@
 
 <p>検索結果</p>
 <% if @restaurants.present? %>
+  <span>ヒット件数：<%= @hits %>/<%= @total%>件 </span>
   <% @restaurants.each do |restaurant| %>
     <p><%= restaurant.name %></p>
   <% end %>
+<%= paginate @restaurants %>
 <% else%>
 　　<p>検索結果がありません</p>
 <% end %>

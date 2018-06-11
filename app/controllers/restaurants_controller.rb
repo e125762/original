@@ -1,17 +1,21 @@
 class RestaurantsController < ApplicationController
   def index
     @areas = Area.all
-#    @group = params[:group_id]
+    @total = Restaurant.count
     if params[:q]
-    if params[:q][:area].present? && params[:search].present?
-      @restaurants = Area.find(params[:q][:area]).restaurants.search(params[:search]).score_desc
-    elsif params[:q][:area].present? && !params[:search].present?
-      @restaurants = Area.find(params[:q][:area]).restaurants.score_desc
-    elsif !params[:q][:area].present? && params[:search].present?
-      @restaurants = Restaurant.search(params[:search]).score_desc
-    else
-      @restaurants = Restaurant.score_desc.all
-    end
+      if params[:q][:area].present? && params[:search].present?
+        @hits = Area.find(params[:q][:area]).restaurants.search(params[:search]).count
+        @restaurants = Area.find(params[:q][:area]).restaurants.search(params[:search]).score_desc.page(params[:page]).per(5)
+      elsif params[:q][:area].present? && !params[:search].present?
+        @hits = Area.find(params[:q][:area]).restaurants.count
+        @restaurants = Area.find(params[:q][:area]).restaurants.score_desc.page(params[:page]).per(5)
+     elsif !params[:q][:area].present? && params[:search].present?
+        @hits = Restaurant.search(params[:search]).count
+        @restaurants = Restaurant.search(params[:search]).score_desc.page(params[:page]).per(5)
+      else
+       @hits = Restaurant.count
+       @restaurants = Restaurant.score_desc.page(params[:page]).per(5)
+      end
     end
   end
 end
