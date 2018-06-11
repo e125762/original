@@ -10,7 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_10_072623) do
+ActiveRecord::Schema.define(version: 2018_06_10_080242) do
+
+  create_table "areas", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "comments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "comment", null: false
@@ -41,6 +47,18 @@ ActiveRecord::Schema.define(version: 2018_06_10_072623) do
     t.index ["user_id"], name: "index_groups_users_on_user_id"
   end
 
+  create_table "restaurants", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "address"
+    t.string "station"
+    t.string "phone"
+    t.float "score"
+    t.bigint "area_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["area_id"], name: "index_restaurants_on_area_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.string "email", null: false
@@ -54,4 +72,5 @@ ActiveRecord::Schema.define(version: 2018_06_10_072623) do
   add_foreign_key "groups", "users"
   add_foreign_key "groups_users", "groups"
   add_foreign_key "groups_users", "users"
+  add_foreign_key "restaurants", "areas"
 end
