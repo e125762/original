@@ -1,5 +1,6 @@
 class RestaurantsController < ApplicationController
   def index
+    @group = Group.find(params[:group_id])
     @areas = Area.all
     @total = Restaurant.count
     if params[:q]

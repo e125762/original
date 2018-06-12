@@ -1,0 +1,12 @@
+<% if current_user.push_liked?(group_id, rst)%>
+  <%= form_for(current_user.likes.find_by(group_id: group_id, restaurant_id: rst.id), url: group_likes_path(group), html: { method: :delete}) do |f| %>
+    <%= hidden_field_tag :rst_id, rst.id %>
+    <%= f.submit '行きたい解除！', class: 'btn btn-danger' %>
+  <% end %>
+<% else %>
+  <%= form_for(current_user.likes.build, url: group_likes_path(group), html: { method: :post}) do |f| %>
+    <%= hidden_field_tag :rst_id, rst.id %>
+    <%= f.submit '行きたい！', class: 'btn btn-primary' %>
+  <% end %>
+<% end %>
+
