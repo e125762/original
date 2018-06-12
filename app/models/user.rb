@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :groups_users
   has_many :joind_groups, through: :groups_users, source: :group
   has_many :comments
+  has_many :likes
 
   has_secure_password validations: false
 
@@ -28,5 +29,18 @@ class User < ApplicationRecord
 
   def joind?(group)
     self.joind_groups.include?(group)
+  end
+
+  def liked(group_id, rst)
+    self.likes.find_or_create_by(group_id: group_id, restaurant_id: rst.id)
+  end
+
+  def unliked(group_id, rst)
+    like = self.likes.find_by(group_id: group_id, restaurant_id: rst.id)
+    like.destroy if like
+  end
+
+  def push_liked?(group_id, rst)
+    self.likes.exists?(group_id: group_id, restaurant_id: rst.id)
   end
 end

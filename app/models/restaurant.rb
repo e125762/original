@@ -1,5 +1,6 @@
 class Restaurant < ApplicationRecord
   belongs_to :area
+  has_many :likes
 
   scope :score_desc, -> {order("restaurants.score DESC")}
   def self.search(search)
