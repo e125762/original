@@ -27,6 +27,9 @@
 </div>
 
 <div>
+<%= link_to 'グループで行きたいお店追加', group_restaurants_path(@group)%>
+</div>
+<div>
   <h3>コメント一覧</h3>
   <% if @comments.present? %>
     <%= paginate @comments %>
