@@ -7,7 +7,7 @@ class Restaurant < ApplicationRecord
     if search
       Restaurant.where(['name LIKE ?', "%#{sanitize_sql_like(search)}%"])
     else
-      Restaurant.all
+      Restaurant.limit(10)
     end
   end
 end
