@@ -29,6 +29,7 @@ class GroupsController < ApplicationController
     @group_users = @group.joind_users
     @comment = Comment.new
     @comments = @group.comments.order('created_at DESC').page(params[:page]).per(5)
+    @restaurants = @group.like_rsts.distinct.order(:id).page(params[:page]).per(5)
   end
 
   def edit
@@ -62,13 +63,6 @@ class GroupsController < ApplicationController
   def correct_user
     @group = current_user.groups.find_by(id: params[:id])
     unless @group
-      redirect_to root_url
-    end
-  end
-
-  def require_group_join
-    group = Group.find_by(id: params[:id])
-    unless current_user.joind?(group)
       redirect_to root_url
     end
   end

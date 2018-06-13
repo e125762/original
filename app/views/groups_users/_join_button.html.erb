@@ -1,11 +1,5 @@
 <% if current_user.joind?(group) %>
-  <%= form_for(current_user.groups_users.find_by(group_id: group.id), html: { method: :delete }) do |f| %>
-    <%= hidden_field_tag :group_id, group.id %>
-    <%= f.submit 'グループを抜ける', class: 'btn btn-danger' %>
-  <% end %>
+  <%= link_to "グループを抜ける", groups_user_path(current_user, group_id: group.id), method: :delete, class: "btn btn-danger" %>
 <% else %>
-  <%= form_for(current_user.groups_users.build) do |f| %>
-    <%= hidden_field_tag :group_id, group.id %>
-    <%= f.submit 'グループ参加', class: 'btn btn-primary' %>
-  <% end %>
+  <%= link_to "グループ参加", groups_users_path(current_user, group_id: group.id), method: :post, class: "btn btn-primary" %>
 <% end %>

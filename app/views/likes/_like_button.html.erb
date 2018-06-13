@@ -1,0 +1,6 @@
+<% if current_user.push_liked?(group_id, rst)%>
+  <%= link_to "行こうよ解除", group_likes_path(group_id: group_id, rst_id: rst.id), method: :delete, class: "btn btn-danger" %>
+<% else %>
+  <%= link_to "行こうよ", group_likes_path(group_id: group_id, rst_id: rst.id), method: :post, class: "btn btn-primary" %>
+<% end %>
+

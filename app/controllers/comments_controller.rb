@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
       redirect_to @group
     else
       @comments = @group.comments.order('created_at DESC').page(params[:page]).per(5)
+      @restaurants = @group.like_rsts.distinct.order(:id).page(params[:page]).per(5)
       flash.now[:danger] = "コメントの投稿に失敗しました"
       render "groups/show"
     end
@@ -20,12 +21,5 @@ class CommentsController < ApplicationController
 
   def comment_params(group_id)
     params.require(:comment).permit(:comment).merge(group_id: group_id)
-  end
-
-  def require_group_join
-    group = Group.find_by(id: params[:group_id])
-    unless current_user.joind?(group)
-      redirect_to root_url
-    end
   end
 end
