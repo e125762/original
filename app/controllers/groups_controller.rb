@@ -7,6 +7,10 @@ class GroupsController < ApplicationController
   def index
     @groups = Group.all.order('updated_at DESC').page(params[:page]).per(5)
     @groups_count = Group.count
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create

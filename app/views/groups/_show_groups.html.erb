@@ -1,0 +1,16 @@
+<% if groups.present? %>
+  <% groups.each do |group| %>
+    <% if current_user.joind?(group) %>
+      <p>タイトル：<%= link_to group.title, group %></p>
+    <% else %>
+      <p>タイトル：<%= group.title %></p>
+    <% end %>
+    <p>起票ユーザー：<%= group.user.name %></p>
+    <p>説明文：<%= group.description %></p>
+    <%= render 'groups_users/join_button', group: group %>
+    <p>ーーーーーーーーーーーーーーーーーーーーーーーーーーーー</p>
+  <% end %>
+  <%= paginate groups, remote: true %>
+<% else %>
+  <h3>まだグループが登録されていません</h3>
+<% end %>
