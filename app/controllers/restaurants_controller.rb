@@ -20,5 +20,10 @@ class RestaurantsController < ApplicationController
        @restaurants = Restaurant.score_desc.page(params[:page]).per(5)
       end
     end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 end
