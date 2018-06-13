@@ -32,7 +32,7 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @group_users = @group.joind_users
     @comment = Comment.new
-    @comments = @group.comments.order('created_at DESC').page(params[:page]).per(5)
+    @comments = @group.comments.order('created_at DESC').page(params[:com]).per(5)
     @restaurants = @group.like_rsts.distinct.order(:id).page(params[:page]).per(5)
 
     respond_to do |format|
