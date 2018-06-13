@@ -1,3 +1,4 @@
+<%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 <h3>グループ詳細</h3>
 <p><%= link_to '戻る', groups_path %></p>
 <% if current_user == @group.user%>
@@ -29,19 +30,9 @@
 <div>
 <%= link_to 'グループで行きたいお店追加', group_restaurants_path(@group)%>
 </div>
-<div>
-  <h3>コメント一覧</h3>
-  <% if @comments.present? %>
-    <%= paginate @comments %>
-    <% @comments.each do |comment| %>
-      <p>名前：<%= comment.user.name%></p>
-      <p>投稿日時：<%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></p>
-      <p>コメント：<%= comment.comment %></p>
-      <span>ーーーーーーーーーーーーーーーーーーーーーーーーーー</span>
-    <% end %>
-  <% else %>
-    <p>コメントなし</p>
-  <% end %>
+
+<div id="comments">
+  <%= render 'groups/show_comments', comments: @comments %>
 </div>
 
 <div>

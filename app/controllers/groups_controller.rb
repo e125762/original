@@ -34,6 +34,11 @@ class GroupsController < ApplicationController
     @comment = Comment.new
     @comments = @group.comments.order('created_at DESC').page(params[:page]).per(5)
     @restaurants = @group.like_rsts.distinct.order(:id).page(params[:page]).per(5)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def edit
