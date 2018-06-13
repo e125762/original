@@ -11,6 +11,7 @@ class CommentsController < ApplicationController
       redirect_to @group
     else
       @comments = @group.comments.order('created_at DESC').page(params[:page]).per(5)
+      @restaurants = @group.like_rsts.distinct.order(:id).page(params[:page]).per(5)
       flash.now[:danger] = "コメントの投稿に失敗しました"
       render "groups/show"
     end
