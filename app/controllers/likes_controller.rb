@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 class LikesController < ApplicationController
   before_action :require_user_logged_in
+  before_action :require_group_join
 
   def create
     rst = Restaurant.find(params[:rst_id])

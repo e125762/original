@@ -1,4 +1,6 @@
 class RestaurantsController < ApplicationController
+  before_action :require_group_join
+
   def index
     @group = Group.find(params[:group_id])
     @areas = Area.all
