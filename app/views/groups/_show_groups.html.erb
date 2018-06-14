@@ -1,13 +1,13 @@
 <% if groups.present? %>
   <% groups.each do |group| %>
-    <% if current_user.joind?(group) %>
-      <p>タイトル：<%= link_to group.title, group %></p>
-    <% else %>
-      <p>タイトル：<%= group.title %></p>
-    <% end %>
+    <div id="g_title_<%= group.id %>">
+      <%= render 'groups/title', group: group %>
+    </div>
     <p>起票ユーザー：<%= group.user.name %></p>
     <p>説明文：<%= group.description %></p>
-    <%= render 'groups_users/join_button', group: group %>
+    <div id="g_button_<%= group.id %>">
+      <%= render 'groups_users/join_button', group: group %>
+    </div>
     <p>ーーーーーーーーーーーーーーーーーーーーーーーーーーーー</p>
   <% end %>
   <%= paginate groups, remote: true %>

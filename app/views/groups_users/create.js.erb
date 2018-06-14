@@ -1,0 +1,2 @@
+$("#g_title_<%= @group.id %>").html("<%= j( render 'groups/title', group: @group ) %>");
+$("#g_button_<%= @group.id %>").html("<%= j( render 'groups_users/join_button', group: @group ) %>");

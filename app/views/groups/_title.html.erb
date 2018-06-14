@@ -1,0 +1,5 @@
+<% if current_user.joind?(group) %>
+  <p>タイトル：<%= link_to group.title, group %></p>
+<% else %>
+  <p>タイトル：<%= group.title %></p>
+<% end %>
