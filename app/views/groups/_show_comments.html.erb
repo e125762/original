@@ -1,0 +1,12 @@
+<h3>コメント一覧</h3>
+<% if comments.present? %>
+  <%= paginate comments, param_name: :com, remote: true %>
+  <% comments.each do |comment| %>
+    <p>名前：<%= comment.user.name%></p>
+    <p>投稿日時：<%= comment.created_at.strftime('%Y/%m/%d %H:%M') %></p>
+    <p>コメント：<%= comment.comment %></p>
+    <span>ーーーーーーーーーーーーーーーーーーーーーーーーーー</span>
+  <% end %>
+<% else %>
+  <p>コメントなし</p>
+<% end %>
