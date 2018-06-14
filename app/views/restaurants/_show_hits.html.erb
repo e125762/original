@@ -7,8 +7,10 @@
     <p>最寄り駅：<%= restaurant.station %></p>
     <p>電話番号：<%= restaurant.phone %></p>
     <p>点数：<%= restaurant.score %></p>
-    <%= render 'likes/like_button', {group_id: params[:group_id], rst: restaurant, group: group} %>
-    <p>ーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーーー</p>
+    <div id="rst_<%= restaurant.id %>">
+      <%= render 'likes/like_button', {group_id: params[:group_id], rst: restaurant, group: group} %>
+    </div>
+    <hr>
   <% end %>
 <%= paginate restaurants, remote: true %>
 <% else %>
