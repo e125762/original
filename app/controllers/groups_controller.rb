@@ -34,7 +34,8 @@ class GroupsController < ApplicationController
     @comment = Comment.new
     @comments = @group.comments.order('created_at DESC').page(params[:com]).per(5)
     @restaurants = @group.like_rsts.distinct.order(:id).page(params[:page]).per(5)
-
+    @likes_count = Like.group_likes_count(params[:id])
+    
     respond_to do |format|
       format.html
       format.js

@@ -1,6 +1,7 @@
 <% if restaurants.present? %>
   <%= paginate restaurants, remote: true %>
   <% restaurants.each do |rst| %>
+    <p><%= @likes_count[rst.id]%>人が行きたい！と言っています</p>
     <p>店名：<%= rst.name %>　｜　点数：<%= rst.score%>点</p>
     <p>エリア：<%= rst.area.name %></p>
     <p>住所：<%= rst.address %></p>
