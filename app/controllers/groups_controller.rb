@@ -32,10 +32,18 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     @group_users = @group.joind_users
     @comment = Comment.new
-    @comments = @group.comments.order('created_at DESC').page(params[:com]).per(5)
+    @g_com = @group.comments
+    @comments = @g_com.order('created_at DESC').page(params[:com]).per(5)
     @restaurants = @group.like_rsts.distinct.order(:id).page(params[:page]).per(5)
     @likes_count = Like.group_likes_count(params[:id])
-    
+    @com_all = @g_com.count
+
+    if !params[:com]
+      @com_num = @com_all
+    else
+      @com_num = @com_all - (params[:com].to_i - 1) * 5
+    end
+
     respond_to do |format|
       format.html
       format.js
