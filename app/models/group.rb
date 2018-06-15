@@ -7,7 +7,7 @@ class Group < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :like_rsts, through: :likes, source: :restaurant
 
-  validates :title, presence: { message: "説明文を入力してください"}, length: { maximum: 20, message: "20字以内"}
-  validates :description, presence: { message: "説明文を入力してください"}, length: { maximum: 100, message: "100字以内" }
+  validates :title, presence: true, length: { maximum: 20 }
+  validates :description, presence: true, length: { maximum: 100 }
 
 end
