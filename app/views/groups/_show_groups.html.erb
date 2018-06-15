@@ -8,7 +8,7 @@
     <div id="g_button_<%= group.id %>">
       <%= render 'groups_users/join_button', group: group %>
     </div>
-    <p>ーーーーーーーーーーーーーーーーーーーーーーーーーーーー</p>
+    <hr>
   <% end %>
   <%= paginate groups, remote: true %>
 <% else %>
