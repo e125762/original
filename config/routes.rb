@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     end
   end
   get 'signup', to: 'users#new'
+  post 'signup', to: 'users#create'
   get 'login', to: 'sessions#new'
   post 'login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
@@ -18,5 +19,6 @@ Rails.application.routes.draw do
   end
 
   get "/groups/:group_id/comments" => redirect("/groups/%{group_id}")
+  get "/users" => redirect("/signup")
   resources :groups_users, only: [:create, :destroy]
 end
