@@ -1,7 +1,7 @@
 <h1>グループ一覧</h1>
 <p><%= link_to '戻る', root_path %></p>
 <%= link_to 'グループを新規作成する', new_group_path %>
-<h4>現在グループ数：<%= @groups_count %>グループ</h4>
+<h3>現在グループ数：<%= @groups_count %>グループ</h3>
 <div id="groups">
   <%= render 'groups/show_groups', groups: @groups %>
 </div>

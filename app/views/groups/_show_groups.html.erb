@@ -1,15 +1,30 @@
 <% if groups.present? %>
-  <% groups.each do |group| %>
-    <div id="g_title_<%= group.id %>">
-      <%= render 'groups/title', group: group %>
-    </div>
-    <p>起票ユーザー：<%= group.user.name %></p>
-    <p>説明文：<%= group.description %></p>
-    <div id="g_button_<%= group.id %>">
-      <%= render 'groups_users/join_button', group: group %>
-    </div>
-    <hr>
-  <% end %>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>グループ</th>
+        <th>参加</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% groups.each do |group| %>
+        <tr>
+          <td>
+            <div id="g_title_<%= group.id %>">
+              <%= render 'groups/title', group: group %>
+            </div>
+            <p>起票ユーザー：<%= group.user.name %></p>
+            <p>説明文：<%= group.description %></p>
+          </td>
+          <td>
+            <div id="g_button_<%= group.id %>">
+              <%= render 'groups_users/join_button', group: group %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
   <%= paginate groups, remote: true %>
 <% else %>
   <h3>まだグループが登録されていません</h3>
