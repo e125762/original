@@ -1,21 +1,23 @@
-<h3>グループ詳細</h3>
+<h1>グループ詳細</h1>
 <p><%= link_to '戻る', groups_path %></p>
 <% if current_user == @group.user%>
   <%= link_to '編集', edit_group_path(@group), class: 'btn btn-xs btn-info' %>
   <%= link_to '削除', @group, method: :delete, data: { confirm: "削除しますか？"}, class: 'btn btn-danger btn-xs'%>
 <% end %>
 <div>
-  <p>グループタイトル:<%= @group.title %></p>
-  <p>グループメンバー</p>
+  <h4>グループタイトル：<%= @group.title %></h4>
+  <hr>
+  <h4>グループメンバー：</h4>
   <% if @group_users.present? %>
     <% @group_users.each do |group_user|%>
-      <span><%= group_user.name %> </span>
+      <span><%= group_user.name %></span>
     <% end %>
   <% else %>
     <p>参加者無し</p>
   <% end %>
-  <p>説明文：<%= @group.description %></p>
-
+  <hr>
+  <h4>説明文：<%= @group.description %></h4>
+  <hr>
   <div class="form-group">
     <%= form_for @comment, url: group_comments_path(@group) do |f| %>
       <%=f.label :comment, 'コメント' %>
